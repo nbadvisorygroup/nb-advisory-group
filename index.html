@@ -1,46 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NB Advisory Group</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 40px;
-            line-height: 1.6;
-            background-color: #f8f9fa;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #1a1a1a;
-            font-size: 2.5em;
-        }
-        p {
-            font-size: 1.1em;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NB Advisory Group | Professional Advisory Services</title>
+  <meta name="description" content="NB Advisory Group provides professional advisory services for data strategy, asset management, operational improvement, business planning, and executive communication." />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111827;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --light: #f8fafc;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --border: #e2e8f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: Arial, Helvetica, sans-serif; line-height: 1.6; color: var(--text); background: var(--light); }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, 92%); margin: 0 auto; }
+
+    header {
+      background: rgba(15, 23, 42, 0.94);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; }
+    .logo { font-weight: 800; letter-spacing: 0.04em; font-size: 1.05rem; }
+    .nav-links { display: flex; gap: 24px; font-size: 0.95rem; color: #cbd5e1; }
+    .nav-links a:hover { color: white; }
+
+    .hero {
+      background:
+        linear-gradient(rgba(15, 23, 42, 0.86), rgba(15, 23, 42, 0.92)),
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.35), transparent 35%),
+        var(--bg);
+      color: white;
+      padding: 96px 0 84px;
+    }
+
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
+    .eyebrow { color: #93c5fd; text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.8rem; font-weight: 700; margin-bottom: 16px; }
+    h1 { font-size: clamp(2.4rem, 6vw, 4.75rem); line-height: 1.03; margin-bottom: 22px; letter-spacing: -0.05em; }
+    .hero p { color: #cbd5e1; font-size: 1.15rem; max-width: 680px; margin-bottom: 30px; }
+    .button-row { display: flex; flex-wrap: wrap; gap: 14px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-secondary { border: 1px solid rgba(255,255,255,0.24); color: white; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); }
+
+    .hero-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 28px;
+      padding: 30px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.24);
+    }
+    .hero-card h2 { font-size: 1.35rem; margin-bottom: 18px; }
+    .check-list { display: grid; gap: 14px; color: #e2e8f0; list-style: none; }
+    .check-list li::before { content: "✓"; color: #93c5fd; font-weight: 900; margin-right: 10px; }
+
+    section { padding: 76px 0; }
+    .section-heading { max-width: 760px; margin-bottom: 34px; }
+    .section-heading h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin-bottom: 14px; letter-spacing: -0.04em; }
+    .section-heading p { color: var(--muted); font-size: 1.05rem; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 22px; padding: 26px; box-shadow: 0 14px 35px rgba(15,23,42,0.06); }
+    .card h3 { margin-bottom: 10px; font-size: 1.15rem; }
+    .card p { color: var(--muted); font-size: 0.98rem; }
+
+    .dark-band { background: var(--bg-soft); color: white; }
+    .dark-band .section-heading p, .dark-band .card p { color: #cbd5e1; }
+    .dark-band .card { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); box-shadow: none; }
+
+    .process { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: steps; }
+    .step { background: white; border: 1px solid var(--border); border-radius: 22px; padding: 24px; counter-increment: steps; }
+    .step::before {
+      content: counter(steps);
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #dbeafe;
+      color: var(--accent-dark);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .step h3 { margin-bottom: 8px; font-size: 1.05rem; }
+    .step p { color: var(--muted); font-size: 0.95rem; }
+
+    .contact-wrap { display: grid; grid-template-columns: 1fr 0.9fr; gap: 28px; align-items: stretch; }
+    .contact-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 32px;
+      box-shadow: 0 14px 35px rgba(15,23,42,0.06);
+    }
+    .contact-card h3 { font-size: 1.4rem; margin-bottom: 18px; }
+    .contact-list { list-style: none; display: grid; gap: 16px; color: var(--text); }
+    .contact-list span { display: block; color: var(--muted); font-size: 0.88rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+    .contact-list a { color: var(--accent-dark); font-weight: 700; }
+
+    .cta {
+      background: linear-gradient(135deg, #1d4ed8, #0f172a);
+      color: white;
+      text-align: center;
+      border-radius: 30px;
+      padding: 56px 24px;
+    }
+    .cta h2 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; margin-bottom: 14px; }
+    .cta p { color: #dbeafe; max-width: 680px; margin: 0 auto 28px; }
+
+    footer { padding: 32px 0; color: var(--muted); font-size: 0.92rem; }
+    .footer-row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 24px; }
+
+    @media (max-width: 860px) {
+      .hero-grid, .cards, .process, .contact-wrap { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero { padding: 72px 0 64px; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>NB Advisory Group</h1>
-        <p><strong>Professional Advisory Services</strong></p>
-        
-        <h2>Welcome</h2>
-        <p>We provide expert guidance and advisory services tailored to your needs.</p>
-        
-        <h2>Contact Us</h2>
-        <p>Email: <a href="mailto:noe@nbadvisorygroup.com">noe@nbadvisorygroup.com</a></p>
-        <p>Phone: (951) 773-1035</p>
-        <p>Location: Corona, California</p>
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo">NB Advisory Group</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#approach">Approach</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Professional Advisory Services</div>
+          <h1>Practical guidance for data, assets, operations, and business growth.</h1>
+          <p>
+            NB Advisory Group provides expert guidance and advisory services tailored to your needs — helping organizations and small businesses turn strategy, data, and operations into measurable outcomes.
+          </p>
+          <div class="button-row">
+            <a class="btn btn-primary" href="mailto:noe@nbadvisorygroup.com">Start a Conversation</a>
+            <a class="btn btn-secondary" href="#services">Explore Services</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Advisory focus areas">
+          <h2>Where we help</h2>
+          <ul class="check-list">
+            <li>Asset data strategy and data quality improvement</li>
+            <li>Operational performance, remediation, and reporting</li>
+            <li>Business planning for new ventures and revenue ideas</li>
+            <li>Executive-ready messaging, roadmaps, and decision support</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Advisory services built for practical execution.</h2>
+          <p>From big-picture strategy to hands-on planning, NB Advisory Group focuses on clear next steps, measurable value, and decisions grounded in real operational needs.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card"><h3>Asset & Data Strategy</h3><p>Define the data, systems, and governance needed to improve asset visibility, operational decisions, and long-term performance.</p></article>
+          <article class="card"><h3>Data Quality & Remediation</h3><p>Identify gaps, prioritize fixes, build remediation plans, and communicate progress in a way leadership and field teams can act on.</p></article>
+          <article class="card"><h3>Business Planning</h3><p>Shape new business ideas into simple models, revenue paths, cost assumptions, launch plans, and risk-aware operating strategies.</p></article>
+          <article class="card"><h3>Executive Communication</h3><p>Turn complex technical work into concise leadership updates, strategy narratives, business cases, and presentation-ready materials.</p></article>
+          <article class="card"><h3>Operations Improvement</h3><p>Map processes, remove friction, clarify roles, and create repeatable ways to measure and improve performance over time.</p></article>
+          <article class="card"><h3>Decision Support</h3><p>Bring structure to ambiguous choices with practical analysis, scenario thinking, assumptions, tradeoffs, and recommended next moves.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="dark-band">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Built at the intersection of infrastructure, data, and business.</h2>
+          <p>NB Advisory Group helps teams move from scattered information and unclear priorities to focused execution. The work blends engineering-minded problem solving, operational experience, data discipline, and clear business communication.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card"><h3>Analytical</h3><p>We clarify the facts, assumptions, risks, and business drivers before recommending a path forward.</p></article>
+          <article class="card"><h3>Practical</h3><p>We focus on what can be implemented, measured, and sustained — not just what looks good on paper.</p></article>
+          <article class="card"><h3>Outcome-Oriented</h3><p>We connect strategy to value, whether that means better decisions, cleaner data, lower risk, or new revenue.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="approach">
+      <div class="container">
+        <div class="section-heading">
+          <h2>A simple approach for complex work.</h2>
+          <p>Every engagement is tailored, but the core method stays consistent: understand the current state, define the target, prioritize the work, and build momentum.</p>
+        </div>
+
+        <div class="process">
+          <div class="step"><h3>Discover</h3><p>Clarify the problem, stakeholders, constraints, data, and success measures.</p></div>
+          <div class="step"><h3>Structure</h3><p>Organize the work into priorities, options, risks, and decision points.</p></div>
+          <div class="step"><h3>Execute</h3><p>Build practical plans, tools, narratives, and recommendations that support action.</p></div>
+          <div class="step"><h3>Measure</h3><p>Track progress, refine the approach, and communicate outcomes clearly.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container contact-wrap">
+        <div>
+          <div class="section-heading">
+            <h2>Contact Us</h2>
+            <p>Have a project, business idea, data challenge, or operational decision that needs structure? Reach out to start the conversation.</p>
+          </div>
+          <div class="button-row">
+            <a class="btn btn-primary" href="mailto:noe@nbadvisorygroup.com">Email NB Advisory Group</a>
+          </div>
+        </div>
+
+        <aside class="contact-card">
+          <h3>NB Advisory Group</h3>
+          <ul class="contact-list">
+            <li><span>Email</span><a href="mailto:noe@nbadvisorygroup.com">noe@nbadvisorygroup.com</a></li>
+            <li><span>Phone</span><a href="tel:+19517731035">(951) 773-1035</a></li>
+            <li><span>Location</span>Corona, California</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta">
+          <h2>Ready to turn ideas into action?</h2>
+          <p>Let’s clarify the opportunity, define the next steps, and build a practical plan that supports measurable progress.</p>
+          <a class="btn btn-primary" href="mailto:noe@nbadvisorygroup.com">noe@nbadvisorygroup.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div>© <span id="year"></span> NB Advisory Group. All rights reserved.</div>
+      <div>Professional Advisory Services · Corona, California</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
